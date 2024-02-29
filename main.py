@@ -37,6 +37,15 @@ def gerarGrafCorrelacao():
 
     return render_template('grafcorrelacao.html', mapa=fig2.to_html())
 
+@app.route('/melhoresedu')
+def exibirmunicipiosedu():
+    data = da.lerdados()
+
+    data['somaedu'] = data['idebanosiniciais'] + data["idebanosfinais"]
+    print(data.sort_values(by=['somaedu'], ascending=False, inplace=True))
+    fig = da.exibirgraficobarraseduc(data.head(15))
+
+    return render_template('melhoresedu.html', figura=fig.to_html())
 
 @app.route('/menu')
 def menu():

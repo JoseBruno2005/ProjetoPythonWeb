@@ -1,6 +1,9 @@
 import pandas as pd
 import plotly.express as px
 
+import dataanalise
+
+
 def analisar():
     dados = pd.read_html('https://pt.wikipedia.org/wiki/Lista_de_munic%C3%ADpios_do_Brasil_por_taxa_de_homic%C3%ADdios')
     mais250 = dados[0]
@@ -8,7 +11,7 @@ def analisar():
     print(dados[0])
 
 def lerdados():
-    dados = pd.read_csv('dadosindicadoresPB3.csv')
+    dados = pd.read_csv(r'C:\Users\joseb\PycharmProjects\ProjetoWeb\dadosIndicadoresPB3.csv')
     #excluir colunas
     dados.drop(columns=['code'], inplace=True)
     return dados
@@ -18,7 +21,9 @@ def exibirmapacorrelacoes(data):
     fig = px.imshow(data.corr())
     return fig
 
-
+def exibirgraficobarraseduc(dados):
+    fig = px.bar(dados, x='municipio', y='somaedu')
+    return fig
 
 '''
 ['Municípios', 'Gentílico',
