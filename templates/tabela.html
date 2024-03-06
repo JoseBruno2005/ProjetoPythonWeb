@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <h1>Tabela das cidades</h1>
+
+  <form action="/tabela" METHOD="POST">
+        <label>Digite o dados das cidades que deseja exibir</label>
+        <input type="text" name="coluna">
+        <button type="submit">Filtrar</button>
+    </form>
+
+    {{tabela|safe}}
+
+</body>
+</html>

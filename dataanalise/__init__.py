@@ -1,5 +1,6 @@
 import pandas as pd
 import plotly.express as px
+import plotly.graph_objects as go
 
 import dataanalise
 
@@ -24,6 +25,28 @@ def exibirmapacorrelacoes(data):
 def exibirgraficobarraseduc(dados):
     fig = px.bar(dados, x='municipio', y='somaedu')
     return fig
+
+def exibirgraficopibpemprego(dados):
+    dados['pibemprego'] = dados['pessoalocupado'], dados["pib"]
+    fig = px.pie(dados, values='pibemprego', names='municipio', title='Pessoas empregadoas por municipios')
+    return fig
+
+def exibirgraficoidebidh(dados):
+    fig = px.line(dados, x='idh', y='municipio')
+    return fig
+
+
+def gerar_tabela(nome_coluna):
+    if nome_coluna not in lerdados().columns:
+        return "A coluna especificada não foi encontrada."
+
+    else:
+        fig = go.Figure(data=[go.Table(
+            header=dict(values=['Município', nome_coluna]),
+            cells=dict(values=[lerdados()['municipio'], lerdados()[nome_coluna]])
+        )])
+
+        return fig
 
 '''
 ['Municípios', 'Gentílico',

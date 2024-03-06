@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ideb e Idh</title>
+</head>
+<body>
+    <h1>Correlação entre o Idh e Ideb</h1>
+
+    <form action="/idh" METHOD="POST">
+        <label>Digite a quantidades de cidades que deseja exibir: </label>
+        <input type="text" name="quantidade">
+        <button type="submit">Filtrar</button>
+    </form>
+
+    {{idh|safe}}
+</body>
+</html>

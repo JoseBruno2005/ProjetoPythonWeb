@@ -30,6 +30,30 @@ def gerarGrafViolenciaPib():
     fig = px.scatter(dados, x='rendapercapita', y='cvli', hover_data=['municipio'])
     return render_template('grafviolenciapib.html', plot=fig.to_html())
 
+@app.route('/idh', methods=['POST', 'GET'])
+def exibirgraficoidh():
+    if request.method == 'POST':
+        qtdcidade = int(request.form.get('quantidade'))
+    else:
+        qtdcidade = 10
+
+    dados = da.lerdados()
+    dados_top = dados.nlargest(qtdcidade, 'idh')
+    fig4 = da.exibirgraficoidebidh(dados_top)
+    return render_template('idh.html', idh=fig4.to_html())
+
+@app.route('/tabela', methods=['POST', 'GET'])
+def exibirtabela():
+    if request.method == 'POST':
+        coluna = str(request.form.get('coluna'))
+    else:
+        coluna = 'pib'
+
+    fig5 = da.gerar_tabela(coluna)
+    return render_template('tabela.html', tabela=fig5.to_html())
+
+
+
 @app.route('/grafcorrelacao')
 def gerarGrafCorrelacao():
     dados = da.lerdados()
@@ -46,6 +70,14 @@ def exibirmunicipiosedu():
     fig = da.exibirgraficobarraseduc(data.head(15))
 
     return render_template('melhoresedu.html', figura=fig.to_html())
+
+
+@app.route('/empregopib')
+def empregopib():
+    data = da.lerdados()
+
+    fig3 = da.exibirgraficopibpemprego(data.head(10))
+    return render_template('empregopib.html', pizza=fig3.to_html())
 
 @app.route('/menu')
 def menu():
